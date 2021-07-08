@@ -1,0 +1,46 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Day Scheduler | Create
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div style="padding-top: 40px;" class="row">
+            <div class="col-9">
+                
+            </div>
+            <div class="col-3">
+                <p class="text-center">Describe your activity and its time, then hit "Add" to pin it to the schedule</p>
+                <form method="POST" action="/create/" class="form-group">
+                    {% csrf_token %}
+                    <input style="margin:5px;" type="text" class="form-control" placeholder="Activity">
+                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01">
+                        <option selected>Day</option>
+                        <option value="1">Monday</option>
+                        <option value="2">Tuesday</option>
+                        <option value="3">Wednesday</option>
+                        <option value="4">Thursday</option>
+                        <option value="5">Friday</option>
+                        <option value="6">Saturday</option>
+                        <option value="7">Sunday</option>
+                    </select>
+                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01">
+                        <option selected>Time</option>
+                        {% for hour in rangeHour %}
+                            {% for minute in rangeMinute %}
+                                {% if minute == 0 %}
+                                    <option value="{{hour}}:00">{{hour}}:00</option>
+                                {% else %}
+                                <option value="{{hour}}:{{minute}}">{{hour}}:{{minute}}</option>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </select>
+                    <button style="margin-top: 10px; margin-left:120px" type="submit" name="add" value="add" class="btn btn-outline-dark">Add</button>   
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
