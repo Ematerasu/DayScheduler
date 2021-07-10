@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+    Day Scheduler | Create
+{% endblock title %}
+
+{% block navButtons %}
+<li class="nav-item">
+    <a class="nav-link" aria-current="page" href="">Create</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="contact/">Contact</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="https://github.com/Ematerasu/DayScheduler">Github</a>
+</li>
+{% endblock %}
+
+
+{% block content %}
+<div style="margin-left: 810px; margin-top:300px;, margin-right: 810px;"> 
+    <form method="POST" action="" class="form-group">
+        {% csrf_token %}
+        <div  class="input-group mb-3">
+            <div class=input-group-prepend">
+                <button type="submit" name="save" class="btn btn-outline-dark">Create New</button>
+            </div>
+            {{form.name}}
+        </div>
+    </form>
+</div>
+
+<div style="margin: 100px 300px 300px 550px">
+    <h3 style="font-family: Arvo;">Type name of your schedule and then press "Create New" button</h3>
+</div>
+{% endblock content %}
+    

@@ -1,40 +1,78 @@
 {% extends 'main/base.html' %}
 
 {% block title %}
-    Day Scheduler | Create
+    Day Scheduler
 {% endblock title %}
 
+{% block navButtons %}
+<li class="nav-item">
+    <a class="nav-link" aria-current="page" href="home/">Create</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="contact/">Contact</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="https://github.com/Ematerasu/DayScheduler">Github</a>
+</li>
+{% endblock %}
 {% block content %}
     <div class="container">
         <div style="padding-top: 40px;" class="row">
             <div class="col-9">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col" width="100px">Time</th>
+                            <th scope="col" width="200px">Monday</th>
+                            <th scope="col" width="200px">Tuesday</th>
+                            <th scope="col" width="200px">Wednesday</th>
+                            <th scope="col" width="200px">Thursday</th>
+                            <th scope="col" width="200px">Friday</th>
+                            <th scope="col" width="200px">Saturday</th>
+                            <th scope="col" width="200px">Sunday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for hour in TIME_VALUES %}
+                        <tr>
+                            <td> {{hour}} </td>
+                            {% for day in rangeDays %}
+                                <td> <div id="{{day}}:{{hour}}" name="{{day}}:{{hour}}">
+                                        <p style="text-align: center;" name="name">
+                                            {% for item in table.activity_set.all %}
+                                                {% if item.day == day and item.time == hour %}
+                                                    {{item.text}}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </p>
+                                     </div>
+                                </td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
                 
             </div>
             <div class="col-3">
                 <p class="text-center">Describe your activity and its time, then hit "Add" to pin it to the schedule</p>
-                <form method="POST" action="/create/" class="form-group">
+                <form method="POST" action="" class="form-group">
                     {% csrf_token %}
-                    <input style="margin:5px;" type="text" class="form-control" placeholder="Activity">
-                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01">
+                    <input style="margin:5px;" type="text" class="form-control" placeholder="Activity" name="name">
+                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01" name="day">
                         <option selected>Day</option>
-                        <option value="1">Monday</option>
-                        <option value="2">Tuesday</option>
-                        <option value="3">Wednesday</option>
-                        <option value="4">Thursday</option>
-                        <option value="5">Friday</option>
-                        <option value="6">Saturday</option>
-                        <option value="7">Sunday</option>
+                        <option value="Mo">Monday</option>
+                        <option value="Tu">Tuesday</option>
+                        <option value="We">Wednesday</option>
+                        <option value="Th">Thursday</option>
+                        <option value="Fr">Friday</option>
+                        <option value="Sa">Saturday</option>
+                        <option value="Su">Sunday</option>
                     </select>
-                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01">
+                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01" name="time">
                         <option selected>Time</option>
-                        {% for hour in rangeHour %}
-                            {% for minute in rangeMinute %}
-                                {% if minute == 0 %}
-                                    <option value="{{hour}}:00">{{hour}}:00</option>
-                                {% else %}
-                                <option value="{{hour}}:{{minute}}">{{hour}}:{{minute}}</option>
-                                {% endif %}
-                            {% endfor %}
+                        {% for time in TIME_VALUES %}
+                            <option value="{{time}}">{{time}}</option>
                         {% endfor %}
                     </select>
                     <button style="margin-top: 10px; margin-left:120px" type="submit" name="add" value="add" class="btn btn-outline-dark">Add</button>   
