@@ -17,3 +17,4 @@ You can check this website at https://day-scheduler.herokuapp.com
 ## Planned
 - More flexibility in arranging
 - Downloading to pdf
+- Mobile version
