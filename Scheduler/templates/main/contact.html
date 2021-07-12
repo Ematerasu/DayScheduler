@@ -1,1 +1,24 @@
-todo
+ {% extends 'main/base.html' %}
+
+ {% block navButtons %}
+<li class="nav-item">
+    <a class="nav-link" aria-current="page" href="/home/">Create</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="">Contact</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="https://github.com/Ematerasu/DayScheduler">Github</a>
+</li>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container" style="text-align: center;">
+        <h6 style="margin: 200px;"> If something is not working properly you can @ me at <br><p style="margin: 20px; text-decoration: underline;">yungchochol@gmail.com</p></br>
+             or create an issue in repository on <a href="https://github.com/Ematerasu/DayScheduler">Github</a> 
+             <br>Thank you for checking out my site :).
+        </h6>
+    </div>
+{% endblock content %}
+    
