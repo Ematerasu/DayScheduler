@@ -1,1 +1,1 @@
-web: gunicorn DayScheduler:app
+web: gunicorn DayScheduler.wsgi
