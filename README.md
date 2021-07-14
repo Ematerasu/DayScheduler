@@ -10,9 +10,4 @@ You can check this website at https://day-scheduler.herokuapp.com
 
 ## Planned
 - More flexibility in arranging
-<<<<<<< HEAD
 - Mobile version
-=======
-- Downloading to pdf
-- Mobile version
->>>>>>> e4afd3f4d7837df39ade7dc10be06511347f70bf
