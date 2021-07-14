@@ -19,22 +19,16 @@
 </style>
 {% endblock css %}
 
-{% block navButtons %}
-<li class="nav-item">
-    <a class="nav-link" aria-current="page" href="/home/">Create</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="/contact/">Contact</a>
-</li>
-<li class="nav-item">
-    <a class="nav-link" href="https://github.com/Ematerasu/DayScheduler">Github</a>
-</li>
-{% endblock %}
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.8.0/html2pdf.bundle.min.js"></script>
+{% endblock scripts %}
+
+
 {% block content %}
     <div class="container">
         <div style="padding-top: 40px;" class="row">
             <div class="col-9">
-                <table class="table table-bordered">
+                <table class="table table-bordered" id="schedule">
                     <thead>
                         <tr>
                             <th scope="col" width="100px">Time</th>
@@ -95,10 +89,26 @@
                             <option value="{{time}}">{{time}}</option>
                         {% endfor %}
                     </select>
-                    <button style="margin-top: 10px; margin-left:120px" type="submit" name="add" value="add" class="btn btn-outline-dark">Add</button>   
+                    <button style="margin-top: 10px; margin-left:110px" type="submit" name="add" value="add" class="btn btn-outline-dark">Add</button>
                 </form>
+                <button style="margin-top: 50px; margin-left:90px" type="submit" onclick="TablePDF()" class="btn btn-outline-dark">Download</button>
             </div>
         </div>
     </div>
+    
+    <script type="text/javascript">
+        function TablePDF(){
+            var element = document.getElementById('schedule');
+            var opt = {
+                margin:       1,
+                filename:     'schedule.pdf',
+                image:        { type: 'jpeg', quality: 1 },
+                html2canvas:  { scale: 0.8 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf(element, opt);
+        }
+    </script>
+    
 {% endblock content %}
     
