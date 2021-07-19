@@ -72,7 +72,7 @@
                 <p class="text-center">Describe your activity and its time, then hit "Add" to pin it to the schedule</p>
                 <form method="POST" action="" class="form-group">
                     {% csrf_token %}
-                    <input style="margin:5px;" type="text" class="form-control" placeholder="Activity" name="name">
+                    <input style="margin:5px;" type="text" class="form-control" placeholder="Activity (max. 25 characters)" name="name">
                     <select style="margin:5px;"  class="form-select" id="inputGroupSelect01" name="day">
                         <option selected>Day</option>
                         <option value="Mo">Monday</option>
@@ -100,11 +100,14 @@
         function TablePDF(){
             var element = document.getElementById('schedule');
             var opt = {
-                margin:       1,
+                margin:       [0,0,15,0],
                 filename:     'schedule.pdf',
                 image:        { type: 'jpeg', quality: 1 },
-                html2canvas:  { scale: 0.8 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                html2canvas:  { 
+                    dpi: 192,
+                    scale: 4
+                    },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
             html2pdf(element, opt);
         }

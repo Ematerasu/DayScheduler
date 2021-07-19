@@ -39,7 +39,7 @@ class Activity(models.Model):
         ('22:00', '22:00'),
     ]
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
-    text = models.CharField(max_length=50)
+    text = models.CharField(max_length=25)
     day = models.CharField(max_length=9, choices=DAYS)
     time = models.CharField(max_length=5, choices=TIME)
 
