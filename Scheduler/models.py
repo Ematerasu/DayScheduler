@@ -41,7 +41,7 @@ class Activity(models.Model):
     table = models.ForeignKey(Table, on_delete=models.CASCADE)
     text = models.CharField(max_length=25)
     day = models.CharField(max_length=9, choices=DAYS)
-    time = models.CharField(max_length=5, choices=TIME)
+    time = models.JSONField()
 
     def __str__(self):
         return self.text

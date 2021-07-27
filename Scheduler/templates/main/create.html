@@ -49,7 +49,7 @@
                                 <td style="margin: 0; padding: 0;"> 
                                     <div style="text-align: center; text-overflow: ellipsis;">
                                             {% for item in table.activity_set.all %}
-                                                {% if item.day == day and item.time == hour %}
+                                                {% if item.day == day and hour in item.time %}
                                                 <form method="POST" action="" class="form-group">
                                                     {% csrf_token %}
                                                     <input type="hidden" name="id" value="{{item.id}}">
@@ -83,12 +83,19 @@
                         <option value="Sa">Saturday</option>
                         <option value="Su">Sunday</option>
                     </select>
-                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01" name="time">
-                        <option selected>Time</option>
+                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01" name="start">
+                        <option selected>Start</option>
                         {% for time in TIME_VALUES %}
                             <option value="{{time}}">{{time}}</option>
                         {% endfor %}
                     </select>
+                    <select style="margin:5px;"  class="form-select" id="inputGroupSelect01" name="end">
+                        <option selected>End</option>
+                        {% for time in TIME_VALUES %}
+                            <option value="{{time}}">{{time}}</option>
+                        {% endfor %}
+                    </select>
+                    
                     <button style="margin-top: 10px; margin-left:110px" type="submit" name="add" value="add" class="btn btn-outline-dark">Add</button>
                 </form>
                 <button style="margin-top: 50px; margin-left:90px" type="submit" onclick="TablePDF()" class="btn btn-outline-dark">Download</button>
@@ -105,7 +112,7 @@
                 image:        { type: 'jpeg', quality: 1 },
                 html2canvas:  { 
                     dpi: 192,
-                    scale: 4
+                    scale: 5
                     },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };

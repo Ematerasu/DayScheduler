@@ -30,8 +30,14 @@ def schedule(response, id):
             if form.is_valid():
                 name = form.cleaned_data["name"]
                 day = form.cleaned_data["day"]
-                time = form.cleaned_data["time"]
-                t.activity_set.create(text=name, day=day, time=time)    
+                start = form.cleaned_data["start"]
+                end = form.cleaned_data["end"]
+                temp = []
+                start_idx = TIME_VALUES.index(start)
+                end_idx = TIME_VALUES.index(end)
+                for i in range(start_idx, end_idx):
+                    temp.append(TIME_VALUES[i])
+                t.activity_set.create(text=name, day=day, time=temp)
         elif response.POST.get("delete"):
             t.activity_set.filter(id=response.POST.get("id")).delete()
         """To clear POST request we gotta redirect to the same page, i'm not really sure if this is proper solution but it works just fine so i'll leave it like this sorry :/"""
