@@ -4,8 +4,19 @@ from .models import Table, Activity
 from .forms import CreateNewSchedule, CreateNewActivity
 from .time_values import TIME_VALUES
 from hashids import Hashids
+from .serializers import ActivitySerializer, TableSerializer
+from rest_framework import viewsets
 # Create your views here.
 hashids = Hashids(min_length=16)
+
+# ViewSets define the view behavior.
+class ActivityViewSet(viewsets.ModelViewSet):
+    queryset = Activity.objects.all()
+    serializer_class = ActivitySerializer
+
+class TableViewSet(viewsets.ModelViewSet):
+    queryset = Table.objects.all()
+    serializer_class = TableSerializer
 
 def home(response):
     if response.method == "POST":
@@ -23,7 +34,11 @@ def contact(response):
     return render(response, "main/contact.html", {})
 
 def schedule(response, id):
-    t = Table.objects.get(id=int(hashids.decode(id)[0]))
+    try:
+        t = Table.objects.get(id=int(hashids.decode(id)[0]))
+    except:
+        t = None
+    
     if response.method == "POST":
         if response.POST.get("add"):
             form = CreateNewActivity(response.POST)
