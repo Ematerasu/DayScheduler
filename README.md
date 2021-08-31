@@ -10,5 +10,8 @@ You can check this website at https://day-scheduler.herokuapp.com
 - Better arranging
 - API (details down below)
 
+## TODO
+- Loading from data base previously made schedule
+
 ## API
 To access API go to https://day-scheduler.herokuapp.com/api/ and then you can choose which model you want to pick (Tables or Activities, activities are part of the table).
