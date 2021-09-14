@@ -21,11 +21,17 @@ class TableViewSet(viewsets.ModelViewSet):
 def home(response):
     if response.method == "POST":
         form = CreateNewSchedule(response.POST)
-        if form.is_valid():
-            n = form.cleaned_data["name"]
-            t = Table(name=n)
-            t.save()
-            return HttpResponseRedirect("/%s" %hashids.encode(t.id))
+        if response.POST.get("create"):
+            if form.is_valid():
+                n = form.cleaned_data["name"]
+                t = Table(name=n)
+                t.save()
+                return HttpResponseRedirect("/%s" %hashids.encode(t.id))
+        elif response.POST.get("load"):
+            if form.is_valid():
+                n = form.cleaned_data["name"]
+                t = Table.objects.get(name=n)
+                return HttpResponseRedirect("/%s" %hashids.encode(t.id))
     else:
         form = CreateNewSchedule()
     return render(response, "main/home.html", {"form":form})
