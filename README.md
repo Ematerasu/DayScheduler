@@ -11,5 +11,8 @@ You can check this website at https://day-scheduler.herokuapp.com
 - API (details down below)
 - Load your previously made schedule
 
+## TODO
+- Add Register/Login system to manage schedules, basically rebuild loading schedule system.
+
 ## API
 To access API go to https://day-scheduler.herokuapp.com/api/ and then you can choose which model you want to pick (Tables or Activities, activities are part of the table).
